@@ -14,6 +14,14 @@ def __(mo):
 
         > This work is *heavily* inspired by [FastHTML](https://fastht.ml/). I mainly made this to see if I could reimplement it easily and if I might be able to hack together a lightweight variant of the idea for Marimo. If you feel like giving folks credit, feel free to join the FastHTML Discord and give them a high-five first. 
 
+        ## Installation
+
+        You can install this project via uv/pip: 
+
+        ```python
+        uv pip install mohtml
+        ```
+
         ## Quick demo
 
         With that out of the way, let's have a quick look what what the DSL is like.
@@ -67,7 +75,7 @@ def __(mo):
 
 @app.cell
 def __(mo, myhtml):
-    mo.iframe(f"{myhtml}", height=130)
+    mo.Html(f"{myhtml}")
     return
 
 
@@ -90,13 +98,8 @@ def __(mo):
 @app.cell
 def __():
     import marimo as mo
-    return (mo,)
-
-
-@app.cell
-def __():
-    from mohtml import a, div, p, h1, script
-    return a, div, h1, p, script
+    from mohtml import a, div, p, h1, script, link
+    return a, div, h1, link, mo, p, script
 
 
 @app.cell
