@@ -1,3 +1,5 @@
+.PHONY: docs
+
 install:
 	python -m pip install uv 
 	uv venv 
@@ -8,4 +10,4 @@ pypi:
 	uv publish
 
 docs:
-	marimo export html nbs/__init__.py --output docs/index.html
+	uv run marimo export html nbs/__init__.py --output docs/index.html
