@@ -8,6 +8,3 @@ install:
 pypi:
 	uv build
 	uv publish
-
-docs:
-	uv run marimo export html nbs/__init__.py --output docs/index.html

@@ -102,10 +102,5 @@ def __():
     return a, div, h1, link, mo, p, script
 
 
-@app.cell
-def __():
-    return
-
-
 if __name__ == "__main__":
     app.run()
