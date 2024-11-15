@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mohtml"
+version = "0.1.0"
+description="DSL for Python to HTML aimed at Marimo"
+
+license = {file = "LICENSE"}
+readme = "README.md"
+authors = [
+    {name = "Vincent D. Warmerdam"},
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+dependencies = [
+    "bs4", "marimo"
+]
+
+[project.urls]
+repository = "https://github.com/koaning/mohtml"
+issue-tracker = "https://github.com/koaning/mohtml/issues"
+documentation = "https://koaning.github.io/mohtml/"
+
+[tool.setuptools.packages.find]
+include = ["mohtml*"]
+exclude = [
+    "docs",
+    "images",
+    "notebooks",
+    "tests",
+]
