@@ -25,7 +25,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "bs4", "marimo"
+    "beautifulsoup4", "marimo"
 ]
 
 [project.urls]
