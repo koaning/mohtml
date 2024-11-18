@@ -1,4 +1,6 @@
-# Enter `mohtml`
+<img src="imgs/icon.png" width="125" height="125" align="right" />
+
+### `mohtml`
 
 This project is all about a DSL to write HTML in Python. 
 
