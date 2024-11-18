@@ -40,7 +40,7 @@ for class_name in html_tags + self_closing_tags:
         '__init__': mk_init(class_name),
         '__repr__': mk_repr(class_name),
         '__doc__': mk_docstring(class_name), 
-        '__str__': mk_repr(class_name)
+        '__str__': mk_repr(class_name),
         '_repr_html_': mk_repr(class_name),
     })
 
