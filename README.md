@@ -4,7 +4,9 @@
 
 This project is all about a DSL to write HTML in Python. 
 
-> This work is *heavily* inspired by [FastHTML](https://fastht.ml/). I mainly made this to see if I could reimplement it easily and if I might be able to hack together a lightweight variant of the idea for Marimo. If you feel like giving folks credit, feel free to join the FastHTML Discord and give them a high-five first. 
+> This work is *heavily* inspired by [FastHTML](https://fastht.ml/).
+> 
+> I mainly made this to see if I could reimplement it easily and if I might be able to hack together a lightweight variant of the idea for [Marimo](https://marimo.app/). If you feel like giving folks credit, feel free to join the [FastHTML Discord](https://discord.gg/qcXvcxMhdP) and give them a high-five first. 
 
 ## Installation
 
