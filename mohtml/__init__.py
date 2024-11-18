@@ -45,3 +45,9 @@ for class_name in html_tags + self_closing_tags:
     })
 
     globals()[class_name] = new_class
+
+def tailwind_css():
+    return script(src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries")
+
+def surreal_js():
+    return script(src="https://cdn.jsdelivr.net/gh/gnat/surreal@main/surreal.js")
