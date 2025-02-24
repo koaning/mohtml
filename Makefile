@@ -11,3 +11,6 @@ pypi:
 
 docs:
 	marimo export html-wasm --mode edit demo.py --output docs
+
+clean:
+	rm -rf dist .ipynb_checkpoints mohtml.egg-info build
