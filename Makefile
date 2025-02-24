@@ -8,3 +8,6 @@ install:
 pypi:
 	uv build
 	uv publish
+
+docs:
+	marimo export html-wasm --mode edit demo.py --output docs

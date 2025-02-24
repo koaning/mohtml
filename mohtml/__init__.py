@@ -20,13 +20,13 @@ def mk_init(class_name):
 
 def mk_repr(class_name):
     def __repr__(self):
-        elem = f"<{class_name}>" if class_name in html_tags else f"<{class_name}/>"
+        elem = f"<{class_name}>" if class_name not in self_closing_tags else f"<{class_name}/>"
         if self.kwargs:
             kwargs_str = ' '.join(f'{k.replace("_", "-")}="{v}"' for k, v in self.kwargs.items())
             elem = f"<{class_name} {kwargs_str}>"
         for arg in self.args:
             elem += f"\n   {arg}"
-        if class_name in html_tags: 
+        if class_name not in self_closing_tags: 
             elem += f"\n</{class_name}>"
         return BeautifulSoup(elem, features="html.parser").prettify()
 
@@ -54,3 +54,6 @@ def surreal_js():
 
 def bootstrap_css():
     return link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC", crossorigin="anonymous")
+
+def alpine_js():
+    return script(src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js")
