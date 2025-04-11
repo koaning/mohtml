@@ -4,7 +4,7 @@ from functools import wraps
 import markdown
 from bs4 import BeautifulSoup
 
-class CustomParser:
+class CustomHTMLParser:
     def __init__(self):
         self.components: Dict[str, Callable] = {}
     
@@ -53,19 +53,25 @@ class CustomParser:
             
             # Get processed inner content
             inner_content = str(soup)
+            if len(inner_content) > 0:
+                if inner_content[0] == "\n":
+                    inner_content = inner_content[1:]
+                if inner_content[-1] == "\n":
+                    inner_content = inner_content[:-1]
             
             # Get attributes
             attrs = self._parse_attributes(tag)
             
             # Call the registered handler
-            return self.components[tag_name](inner_content, **attrs)
+            return str(self.components[tag_name](inner_content, **attrs))
         
         # If not a custom component, return as is
         return str(tag)
     
-    def __call__(self, content: str) -> str:
+    def __call__(self, content) -> str:
         """Parse content and process any custom components"""
         # First check if it's markdown and convert if necessary
+        content = str(content)
         if not content.strip().startswith('<'):
             content = markdown.markdown(content)
         

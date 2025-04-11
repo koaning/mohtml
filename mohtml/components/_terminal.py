@@ -1,3 +1,5 @@
+from mohtml import div
+
 from jinja2 import Template
 
 template = Template("""
@@ -85,4 +87,5 @@ def terminal(content, title="terminal", theme="dark"):
         'theme': dark_theme if theme == "dark" else light_theme
     }
     
-    return template.render(context)
+    return div(template.render(context))
+

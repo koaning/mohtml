@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.11.6"
+__generated_with = "0.12.8"
 app = marimo.App(width="medium")
 
 
@@ -87,62 +87,62 @@ def _(div, mo, p):
             nickname="furball", 
             desc="takes a red pill daily", 
             avatar="https://placecats.com/neo_2/200/200"
-        )
-    ])
-    return CoolCat, img, span
-
-
-@app.cell
-def _(div):
-    from mohtml import link
-
-    def boostrap_css():
-        return link(
-            rel="stylesheet", 
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        )
-
-    def horizontal_spacing(*args):
-        return div(
-            div(*[div(a, klass="col") for a in args], 
-                klass="row"
-            ), 
-            klass="container"
-        )
-
-    # You can uncomment the line below to make the lower cell look nicer, but it conflicts with the tailwind css that we loaded earlier. 
-    # boostrap_css()
-    return boostrap_css, horizontal_spacing, link
-
-
-@app.cell
-def _(CoolCat, horizontal_spacing):
-    horizontal_spacing(
-        CoolCat(
-            name="tank", 
-            nickname="the hunter", 
-            desc="takes a blue pill daily", 
-            avatar="https://placecats.com/neo/200/200"
         ),
-        CoolCat(
-            name="neo", 
-            nickname="furball", 
-            desc="takes a red pill daily", 
-            avatar="https://placecats.com/neo_2/200/200"
-        ), 
         CoolCat(
             name="bella", 
             nickname="the reckless one", 
             desc="will never ever quit", 
             avatar="https://placecats.com/bella/200/200"
         ), 
-        CoolCat(
-            name="joy", 
-            nickname="the lazy one", 
-            desc="totally quits all the time", 
-            avatar="https://placecats.com/louie/200/200"
-        )
-    )
+    ])
+    return CoolCat, img, span
+
+
+@app.cell(hide_code=True)
+def _():
+    # from mohtml import link
+
+    # def boostrap_css():
+    #     return link(
+    #         rel="stylesheet", 
+    #         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    #     )
+
+    # def horizontal_spacing(*args):
+    #     return div(
+    #         div(*[div(a, klass="col") for a in args], 
+    #             klass="row"
+    #         ), 
+    #         klass="container"
+    #     )
+
+    # boostrap_css()
+    # horizontal_spacing(
+    #     CoolCat(
+    #         name="tank", 
+    #         nickname="the hunter", 
+    #         desc="takes a blue pill daily", 
+    #         avatar="https://placecats.com/neo/200/200"
+    #     ),
+    #     CoolCat(
+    #         name="neo", 
+    #         nickname="furball", 
+    #         desc="takes a red pill daily", 
+    #         avatar="https://placecats.com/neo_2/200/200"
+    #     ), 
+    #     CoolCat(
+    #         name="bella", 
+    #         nickname="the reckless one", 
+    #         desc="will never ever quit", 
+    #         avatar="https://placecats.com/bella/200/200"
+    #     ), 
+    #     CoolCat(
+    #         name="joy", 
+    #         nickname="the lazy one", 
+    #         desc="totally quits all the time", 
+    #         avatar="https://placecats.com/louie/200/200"
+    #     )
+    # )
     return
 
 
@@ -150,15 +150,16 @@ def _(CoolCat, horizontal_spacing):
 def _(div, mo, script):
     from mohtml import surreal_js, tailwind_css
 
-    mo.iframe(str(div(
+    elem = div(
         surreal_js(), 
         tailwind_css(),
         div(
             "My background changes when you click me.",
             script("""me().on("click", ev => { me(ev).classToggle('bg-gray-200') })""")
         )
-    )))
-    return surreal_js, tailwind_css
+    )
+    mo.iframe(str(elem))
+    return elem, surreal_js, tailwind_css
 
 
 @app.cell
@@ -174,6 +175,37 @@ def _(div, p):
         )
     )
     return (yes_really_anything,)
+
+
+@app.cell
+def _():
+    from mohtml.parser import CustomHTMLParser
+    from mohtml.components import terminal 
+
+    parser = CustomHTMLParser()
+
+    # You would normally use this as a decorator. May change this. 
+    parser.register("terminal")(terminal)
+    return CustomHTMLParser, parser, terminal
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    start_value = """<terminal theme="dark">
+    hello world
+    </terminal>"""
+
+    editor = mo.ui.code_editor(language="html", value=start_value)
+    editor
+    return editor, start_value
+
+
+@app.cell(hide_code=True)
+def _(editor, mo, parser):
+    mo.md(parser(f"""
+    {editor.value}
+    """))
+    return
 
 
 if __name__ == "__main__":
