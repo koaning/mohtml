@@ -200,6 +200,12 @@ def _(mo):
     return editor, start_value
 
 
+@app.cell
+def _(terminal):
+    help(terminal)
+    return
+
+
 @app.cell(hide_code=True)
 def _(editor, mo, parser):
     mo.md(parser(f"""
@@ -214,7 +220,7 @@ def _(pl, serialize):
     import anywidget
     import traitlets
     from jinja2 import Template
-
+    from uuid import uuid4
 
     def plotty(plot_logic, **kwargs): 
         dataframes = {}
@@ -227,12 +233,12 @@ def _(pl, serialize):
                     other[k] = f'"{v}"'
                 else:
                     other[k] = v
-    
+
         template_str = """
         import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
         import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
         import * as arrow from 'https://cdn.jsdelivr.net/npm/apache-arrow@latest/+esm';
-    
+
         function readPolarsDataFrame(base64Value) {
           // Decode base64 to ArrayBuffer
           const binaryString = atob(base64Value);
@@ -241,10 +247,10 @@ def _(pl, serialize):
             bytes[i] = binaryString.charCodeAt(i);
           }
           const arrayBuffer = bytes.buffer;
-      
+
           // The correct way to create a table from a buffer
           const table = arrow.tableFromIPC(arrayBuffer);
-      
+
           return table;
         }
 
@@ -263,6 +269,7 @@ def _(pl, serialize):
         export default { render };
         """
         esm = Template(template_str).render(plot_logic=plot_logic.strip(), dataframes=dataframes, other=other)
+    
         class Widget(anywidget.AnyWidget):
             _esm = esm
 
@@ -282,7 +289,7 @@ def _(pl, serialize):
       ]
     })
     """, bls=bls)
-    return Template, anywidget, bls, plotty, srsly, traitlets
+    return Template, anywidget, bls, plotty, srsly, traitlets, uuid4
 
 
 @app.cell
