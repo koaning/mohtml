@@ -60,7 +60,8 @@ template = Template("""
     
     {# Terminal Content #}
     <div style="
-        padding: 16px;
+        padding: 8px;
+        padding-left: 24px;
         white-space: pre-wrap;
         font-size: 14px;
         line-height: 1.4;

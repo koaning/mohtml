@@ -25,10 +25,10 @@ def mk_repr(class_name):
             kwargs_str = ' '.join(f'{k.replace("_", "-")}="{v}"' for k, v in self.kwargs.items())
             elem = f"<{class_name} {kwargs_str}>"
         for arg in self.args:
-            elem += f"\n   {arg}"
+            elem += f"{arg}"
         if class_name not in self_closing_tags: 
-            elem += f"\n</{class_name}>"
-        return BeautifulSoup(elem, features="html.parser").prettify()
+            elem += f"</{class_name}>"
+        return elem
 
     return __repr__
 
@@ -57,3 +57,7 @@ def bootstrap_css():
 
 def alpine_js():
     return script(src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js")
+
+
+def pretty_print(thing):
+    print(BeautifulSoup(str(thing), features="html.parser").prettify())
