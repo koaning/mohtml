@@ -85,3 +85,21 @@ class CustomHTMLParser:
                 tag.replace_with(BeautifulSoup(replacement, 'html.parser'))
         
         return str(soup)
+
+
+class CustomMarkdownParser:
+    def __init__(self):
+        self.parser = CustomHTMLParser()
+    
+    def register(self, tag_name: str):
+        return self.parser.register(tag_name)
+    
+    def __call__(self, content) -> str:
+        items = content.split("```")
+        out = ""
+        for i, item in enumerate(items):
+            if i % 2 == 1:
+                out += "\n```" + item + "```\n"
+            else:
+                out += self.parser(item)
+        return out
