@@ -85,3 +85,38 @@ class CustomHTMLParser:
                 tag.replace_with(BeautifulSoup(replacement, 'html.parser'))
         
         return str(soup)
+
+
+class CustomMarkdownParser:
+    def __init__(self):
+        self.parser = CustomHTMLParser()
+    
+    def register(self, tag_name: str):
+        return self.parser.register(tag_name)
+    
+    def __call__(self, content) -> str:
+        import re
+        def is_html(text):
+            # Naive check: returns True if any HTML tag is present
+            return bool(re.search(r'<[a-zA-Z][^>]*>', text))
+        def strip_outer_paragraph(html):
+            match = re.fullmatch(r'<p>(.*)</p>', html, re.DOTALL)
+            if match:
+                return match.group(1)
+            return html
+
+        code_block_pattern = re.compile(r'(```.*?```)', re.DOTALL)
+        segments = code_block_pattern.split(content)
+        out = ""
+        for segment in segments:
+            if segment.startswith('```') and segment.endswith('```'):
+                # This is a code block, leave as-is
+                out += segment
+            else:
+                # Not a code block: check for HTML
+                if is_html(segment):
+                    html = self.parser(segment)
+                    out += strip_outer_paragraph(html)
+                else:
+                    out += segment
+        return out
