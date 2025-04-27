@@ -2,7 +2,7 @@
 
 import marimo
 
-__generated_with = "0.13.2"
+__generated_with = "0.13.0"
 app = marimo.App(width="medium")
 
 
@@ -189,6 +189,30 @@ def _():
     # You would normally use this as a decorator. May change this. 
     parser.register("terminal")(terminal)
     return parser, terminal
+
+
+@app.cell
+def _(parser):
+    test_str = """This returns a generator of `Path` objects. 
+
+    ```python
+    Path().glob("*/*.md")
+    ```
+    """
+
+    items = test_str.split("```")
+    out = ""
+    for i, item in enumerate(items):
+        if i % 2 == 1:
+            out += "```" + item + "```"
+        else:
+            if "terminal" in item:
+                out += parser(item)
+            else: 
+                out += item
+
+    print(out)
+    return
 
 
 @app.cell
