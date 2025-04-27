@@ -18,11 +18,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install uv
-        run: pip install uv
-      - name: Install dependencies with uv
+      - name: pytest with uv
         run: |
+          pip install uv 
+          uv venv
           uv pip install -r requirements.txt
           uv pip install pytest
-      - name: Run tests
-        run: pytest
+          uv run pytest
