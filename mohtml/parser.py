@@ -95,11 +95,28 @@ class CustomMarkdownParser:
         return self.parser.register(tag_name)
     
     def __call__(self, content) -> str:
-        items = content.split("```")
+        import re
+        def is_html(text):
+            # Naive check: returns True if any HTML tag is present
+            return bool(re.search(r'<[a-zA-Z][^>]*>', text))
+        def strip_outer_paragraph(html):
+            match = re.fullmatch(r'<p>(.*)</p>', html, re.DOTALL)
+            if match:
+                return match.group(1)
+            return html
+
+        code_block_pattern = re.compile(r'(```.*?```)', re.DOTALL)
+        segments = code_block_pattern.split(content)
         out = ""
-        for i, item in enumerate(items):
-            if i % 2 == 1:
-                out += "\n```" + item + "```\n"
+        for segment in segments:
+            if segment.startswith('```') and segment.endswith('```'):
+                # This is a code block, leave as-is
+                out += segment
             else:
-                out += self.parser(item)
+                # Not a code block: check for HTML
+                if is_html(segment):
+                    html = self.parser(segment)
+                    out += strip_outer_paragraph(html)
+                else:
+                    out += segment
         return out
