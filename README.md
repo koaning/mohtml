@@ -63,4 +63,4 @@ This is already pretty cool on it's own, but there are a few directions here.
 
 1. Maybe we can use this tool to make representations of objects nicer in Marimo.
 2. Maybe we can come up with a nice way to turn these HTML objects into something reactive.
-3. Maybe we can use this as an alternative for Jinja templates in some dases. Could be nice to make some simple dashboard-y UI components here.
+3. Maybe we can use this as an alternative for Jinja templates in some cases. Could be nice to make some simple dashboard-y UI components here.
