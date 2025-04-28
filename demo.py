@@ -269,7 +269,7 @@ def _(pl, serialize):
         export default { render };
         """
         esm = Template(template_str).render(plot_logic=plot_logic.strip(), dataframes=dataframes, other=other)
-    
+
         class Widget(anywidget.AnyWidget):
             _esm = esm
 
