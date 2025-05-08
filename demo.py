@@ -1,8 +1,6 @@
-
-
 import marimo
 
-__generated_with = "0.13.0"
+__generated_with = "0.13.6"
 app = marimo.App(width="medium")
 
 
@@ -42,10 +40,10 @@ def _(a, div, h1, p, script):
 def _(mo):
     mo.md(
         """
-        ## Fun representations
+    ## Fun representations
 
-        It is pretty easy to use this tool to build custom representations of objects. Check the demo below.
-        """
+    It is pretty easy to use this tool to build custom representations of objects. Check the demo below.
+    """
     )
     return
 
@@ -216,50 +214,11 @@ def _(parser):
 
 
 @app.cell
-def _(mo, template_str):
-    from jinja2 import Template 
-
-
-    class Admonition:
-        """
-        A simple admonition class for creating note, tip, warning, and danger callouts.
-        """
-        TYPES = {
-            'note': {'icon': 'ℹ️', 'color': '#448aff'},
-            'tip': {'icon': '💡', 'color': '#00bfa5'},
-            'warning': {'icon': '⚠️', 'color': '#ff9100'},
-            'danger': {'icon': '🛑', 'color': '#ff5252'}
-        }
-
-        def __init__(self, content, type='note', title=None, collapsible=False):
-            """
-            Initialize an admonition.
-
-            Args:
-                content (str): The main content of the admonition
-                type (str): Type of admonition (note, tip, warning, danger)
-                title (str, optional): Custom title. Defaults to capitalized type.
-                collapsible (bool, optional): Whether the admonition can be collapsed.
-            """
-            if type not in self.TYPES:
-                type = 'note'
-
-            self.type = type
-            self.content = content
-            self.title = title if title is not None else type.capitalize()
-            self.collapsible = collapsible
-            self.properties = self.TYPES[type]
-
-        def _display_(self):
-            return mo.md(Template(template_str).render(title=self.title, content=self.content, type=self.type))
-    return (Admonition,)
-
-
-@app.cell
-def _(Admonition):
+def _(p):
+    from mohtml.components import highlight
     from mohtml import b
 
-    Admonition(b("this is a demo"), title="huh?", type="danger")
+    p("I want to say", highlight("hello ", b("world"), color="yellow"), "to all of you", style="font-size: 30px;")
     return
 
 
@@ -400,7 +359,7 @@ def _():
       }
     </style>
     """
-    return (template_str,)
+    return
 
 
 @app.cell(hide_code=True)
