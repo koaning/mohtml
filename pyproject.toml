@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mohtml"
-version = "0.1.7"
+version = "0.1.8"
 description="DSL for Python to HTML aimed at Marimo"
 
 license = {file = "LICENSE"}
