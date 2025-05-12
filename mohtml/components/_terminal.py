@@ -88,5 +88,5 @@ def terminal(content, title="terminal", theme="dark"):
         'theme': dark_theme if theme == "dark" else light_theme
     }
     
-    return div(template.render(context))
+    return div(template.render(context), style="all: initial;")
 
