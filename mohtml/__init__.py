@@ -58,6 +58,8 @@ def bootstrap_css():
 def alpine_js():
     return script(src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js")
 
+def htmx_js():
+    return script(src="https://unpkg.com/htmx.org@2.0.4", integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+", crossorigin="anonymous")
 
 def pretty_print(thing):
     print(BeautifulSoup(str(thing), features="html.parser").prettify())
