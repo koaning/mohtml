@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup
 
-html_tags = ['a', 'p', 'i', 'b', 'h1','h2','h3','h4','h5','h6','div','span','pre','blockquote','q','ul','ol','li','dl','dt','dd','table','thead','tbody','tfoot','tr','th','td','caption','form','label','select','option','textarea','button','fieldset','legend','article','section','nav','aside','header','footer','main','figure','figcaption','strong','em','mark','code','samp','kbd','var','time','abbr','dfn','sub','sup','audio','video','picture','canvas','details','summary','dialog','script','noscript','template','style','html','head','body']
+html_tags = ['a', 'p', 'i', 'b', 'h1','h2','h3','h4','h5','h6','div','span','pre','blockquote','q','ul','ol','li','dl','dt','dd','table','thead','tbody','tfoot','tr','th','td','caption','form','label','select','option','textarea','button','fieldset','legend','article','section','nav','aside','header','footer','main','figure','figcaption','strong','em','mark','code','samp','kbd','var','time','abbr','dfn','sub','sup','audio','video','picture','canvas','details','summary','dialog','script','noscript','template','style','html','head','body','svg']
 
-self_closing_tags = ['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']
+self_closing_tags = ['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr','circle','rect','ellipse','line','polyline','polygon','path']
 
 
 def mk_init(class_name): 
