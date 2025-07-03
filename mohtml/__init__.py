@@ -23,7 +23,7 @@ def mk_repr(class_name):
         elem = f"<{class_name}>" if class_name not in self_closing_tags else f"<{class_name}/>"
         if self.kwargs:
             kwargs_str = ' '.join(f'{k.replace("_", "-")}="{v}"' for k, v in self.kwargs.items())
-            elem = f"<{class_name} {kwargs_str}>"
+            elem = f"<{class_name} {kwargs_str}>" if class_name not in self_closing_tags else f"<{class_name} {kwargs_str}/>"
         for arg in self.args:
             elem += f"{arg}"
         if class_name not in self_closing_tags: 

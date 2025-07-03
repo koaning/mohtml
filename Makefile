@@ -5,7 +5,7 @@ install:
 	uv venv 
 	uv pip install bs4 marimo -e .
 
-pypi:
+pypi: clean
 	uv build
 	uv publish
 
